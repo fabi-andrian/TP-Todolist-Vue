@@ -14,7 +14,10 @@
       <li 
       v-for="ToDo in ToDos"
       :key="ToDo.date">
-    {{ ToDo.title }}
+      <label>
+        <input type="checkbox" v-model="ToDo.completed">
+        {{ ToDo.title }}
+      </label>
       </li>
     </ul>
   </div>
@@ -24,7 +27,16 @@
 import { ref } from 'vue';
 
 const newToDo = ref ('')
-const ToDos = ref([])
+const ToDos = ref([{
+  title: 'Tâche 1',
+  completed: true,
+  date: 1,
+},
+{
+  title: 'Tâche 2',
+  completed: false,
+  date: 2,
+}])
 const addTodo = () => {
   ToDos.value.push({
     title: newToDo.value,
