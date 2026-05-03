@@ -12,8 +12,9 @@
   <div v-else>
     <ul>
       <li 
-      v-for="ToDo in ToDos"
-      :key="ToDo.date">
+      v-for="ToDo in sortedToDos()"
+      :key="ToDo.date"
+      :class="{completed: ToDo.completed}">
       <label>
         <input type="checkbox" v-model="ToDo.completed">
         {{ ToDo.title }}
@@ -45,4 +46,14 @@ const addTodo = () => {
   })
   newToDo.value = ''
 }
+const sortedToDos = () => {
+  return ToDos.value.toSorted((a,b) => a.completed > b.completed ? 1 : -1)
+}
 </script>
+
+<style>
+.completed {
+  opacity: .5;
+  text-decoration: line-through;
+}
+</style>
